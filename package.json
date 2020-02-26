@@ -1,0 +1,50 @@
+{
+    "name": "i18next-webpack-backend",
+    "version": "0.1.0",
+    "description": "Backend JSON loader for webpack applications.",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc -p .",
+        "watch": "tsc -p . -w",
+        "start": "node dist/cli/main.js",
+        "test": "tsc -p . --noEmit && eslint \"src/**/*.ts*\" -f visualstudio"
+    },
+    "author": "ReactWay <dev@reactway.com> (https://github.com/reactway)",
+    "contributors": [
+        "Eimantas Zubavičius <eimantas.zubavicius@quatrodev.com> (https://github.com/EimantasZubavicius)"
+    ],
+    "license": "MIT",
+    "files": [
+        "dist",
+        "docs",
+        "*.js",
+        "*.d.ts",
+        "!*.config.js",
+        "!dist/_debug*"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/reactway/i18next-webpack-backend.git"
+    },
+    "bugs": {
+        "url": "https://github.com/reactway/i18next-webpack-backend/issues"
+    },
+    "homepage": "https://github.com/reactway/i18next-webpack-backend#readme",
+    "devDependencies": {
+        "@reactway/eslint-config": "^1.0.1",
+        "@types/lodash.set": "^4.3.6",
+        "@types/webpack-env": "^1.15.1",
+        "eslint": "^6.8.0",
+        "ts-node": "^8.6.2",
+        "typescript": "^3.8.2",
+        "prettier": "^1.19.1"
+    },
+    "peerDependencies": {
+        "@types/webpack-env": "^1.15.1"
+    },
+    "dependencies": {
+        "i18next": "^19.3.2",
+        "lodash.set": "^4.3.2"
+    }
+}

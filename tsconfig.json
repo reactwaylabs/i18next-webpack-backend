@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "ES2016",
+        "outDir": "dist",
+        "rootDir": "src",
+        "jsx": "react",
+        "noUnusedLocals": true,
+        "declaration": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmitHelpers": true,
+        "importHelpers": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "types": ["webpack-env"]
+    },
+    "exclude": ["dist"]
+}
