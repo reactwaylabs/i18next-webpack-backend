@@ -40,7 +40,7 @@ export class WebpackBackend implements Module {
         const translations = {};
 
         await Promise.all(
-            namespaces.map(namespace => {
+            namespaces.map(async namespace => {
                 return Promise.all(
                     languages.map(async lang => {
                         const builtKey = `./${lang}/${namespace}.json`;

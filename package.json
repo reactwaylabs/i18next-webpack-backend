@@ -45,6 +45,7 @@
     },
     "dependencies": {
         "i18next": "^19.3.2",
-        "lodash.set": "^4.3.2"
+        "lodash.set": "^4.3.2",
+        "tslib": "^1.11.0"
     }
 }
