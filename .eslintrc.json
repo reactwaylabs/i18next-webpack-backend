@@ -1,4 +1,3 @@
 {
-    "extends": ["@reactway"],
-    "ignorePatterns": ["src/shared/locale/translations/translations.d.ts"]
+    "extends": ["@reactway"]
 }
