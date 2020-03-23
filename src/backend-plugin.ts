@@ -7,7 +7,7 @@ export interface WebpackBackendOptions {
 
 export class WebpackBackend implements Module {
     public readonly type = "backend";
-    private jsons: __WebpackModuleApi.RequireContext = require.context("");
+    private jsons: __WebpackModuleApi.RequireContext | null = null;
     private keys: string[] = [];
     constructor(services: Services, options: WebpackBackendOptions = { context: undefined }) {
         this.init(services, options);
@@ -22,6 +22,16 @@ export class WebpackBackend implements Module {
 
     public async read(language: string, namespace: string, callback: ReadCallback): Promise<void> {
         const builtKey = `./${language}/${namespace}.json`;
+        if (this.jsons == null) {
+            callback(
+                new Error(`No context given!`),
+                // TODO: Fix this when types are up to date with newest implementation.
+                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                // @ts-ignore
+                null
+            );
+            return;
+        }
         if (this.keys.includes(builtKey) === false) {
             callback(
                 new Error(`Namespace "${namespace}" for language "${language}" was not found!`),
@@ -44,6 +54,16 @@ export class WebpackBackend implements Module {
                 return Promise.all(
                     languages.map(async lang => {
                         const builtKey = `./${lang}/${namespace}.json`;
+                        if (this.jsons == null) {
+                            callback(
+                                new Error(`No context given!`),
+                                // TODO: Fix this when types are up to date with newest implementation.
+                                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                                // @ts-ignore
+                                null
+                            );
+                            return;
+                        }
                         if (this.keys.includes(builtKey) === false) {
                             console.error(new Error(`Namespace "${namespace}" for language "${lang}" was not found!`));
                             return;
