@@ -1,4 +1,4 @@
-import { ReadCallback, Services, Module, MultiReadCallback } from "i18next";
+import type { ReadCallback, Services, Module, MultiReadCallback } from "i18next";
 import set from "lodash.set";
 
 export interface WebpackBackendOptions {
