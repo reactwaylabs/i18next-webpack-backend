@@ -65,7 +65,7 @@ export class WebpackBackend implements Module {
                             return;
                         }
                         if (this.keys.includes(builtKey) === false) {
-                            console.error(new Error(`Namespace "${namespace}" for language "${lang}" was not found!`));
+                            callback(new Error(`Namespace "${namespace}" for language "${lang}" was not found!`), null);
                             return;
                         }
                         const json = await this.jsons(builtKey);
