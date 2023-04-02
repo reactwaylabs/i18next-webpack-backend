@@ -6,6 +6,7 @@ export interface WebpackBackendOptions {
 }
 
 export class WebpackBackend implements Module {
+    public static readonly type = "backend";
     public readonly type = "backend";
     private jsons: __WebpackModuleApi.RequireContext | null = null;
     private keys: string[] = [];
@@ -65,7 +66,13 @@ export class WebpackBackend implements Module {
                             return;
                         }
                         if (this.keys.includes(builtKey) === false) {
-                            callback(new Error(`Namespace "${namespace}" for language "${lang}" was not found!`), null);
+                            callback(
+                                new Error(`Namespace "${namespace}" for language "${lang}" was not found!`),
+                                // TODO: Fix this when types are up to date with newest implementation.
+                                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                                // @ts-ignore
+                                null
+                            );
                             return;
                         }
                         const json = await this.jsons(builtKey);
