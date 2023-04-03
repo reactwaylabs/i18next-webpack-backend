@@ -51,8 +51,8 @@ export class WebpackBackend implements Module {
         const translations = {};
 
         await Promise.all(
-            namespaces.map(async namespace => {
-                return Promise.all(
+            namespaces.map(namespace =>
+                Promise.all(
                     languages.map(async lang => {
                         const builtKey = `./${lang}/${namespace}.json`;
                         if (this.jsons == null) {
@@ -78,8 +78,8 @@ export class WebpackBackend implements Module {
                         const json = await this.jsons(builtKey);
                         set(translations, `${lang}.${namespace}`, json);
                     })
-                );
-            })
+                )
+            )
         );
 
         if (Object.keys(translations).length === 0) {
