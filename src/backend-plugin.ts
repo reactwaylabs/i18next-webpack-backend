@@ -1,4 +1,4 @@
-import { ReadCallback, Services, Module, MultiReadCallback } from "i18next";
+import type { ReadCallback, Services, Module, MultiReadCallback } from "i18next";
 import set from "lodash.set";
 
 export interface WebpackBackendOptions {
@@ -6,6 +6,7 @@ export interface WebpackBackendOptions {
 }
 
 export class WebpackBackend implements Module {
+    public static readonly type = "backend";
     public readonly type = "backend";
     private jsons: __WebpackModuleApi.RequireContext | null = null;
     private keys: string[] = [];
@@ -50,8 +51,8 @@ export class WebpackBackend implements Module {
         const translations = {};
 
         await Promise.all(
-            namespaces.map(async namespace => {
-                return Promise.all(
+            namespaces.map(namespace =>
+                Promise.all(
                     languages.map(async lang => {
                         const builtKey = `./${lang}/${namespace}.json`;
                         if (this.jsons == null) {
@@ -65,14 +66,20 @@ export class WebpackBackend implements Module {
                             return;
                         }
                         if (this.keys.includes(builtKey) === false) {
-                            console.error(new Error(`Namespace "${namespace}" for language "${lang}" was not found!`));
+                            callback(
+                                new Error(`Namespace "${namespace}" for language "${lang}" was not found!`),
+                                // TODO: Fix this when types are up to date with newest implementation.
+                                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+                                // @ts-ignore
+                                null
+                            );
                             return;
                         }
                         const json = await this.jsons(builtKey);
                         set(translations, `${lang}.${namespace}`, json);
                     })
-                );
-            })
+                )
+            )
         );
 
         if (Object.keys(translations).length === 0) {
